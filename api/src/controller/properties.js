@@ -46,13 +46,15 @@ async function getLastValuesFromPi () {
   const res = await fetch(`https://io.adafruit.com/api/v2/${process.env.API_USER}/feeds`, {
     headers: { 'x-aio-key': process.env.API_KEY }
   })
-  const feeds = await res.json()
+  const result = await res.json()
 
-  return feeds.map(feed => ({
+  const feeds = result.map(feed => ({
     name: feed.name,
     value: feed.last_value,
     updated: feed.updated_at
   }))
+
+  return feeds
 }
 
 async function getValuesFromPi (feedName, limit = 30) {
