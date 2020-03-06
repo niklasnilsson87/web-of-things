@@ -5,26 +5,16 @@ include head.pug
     .col-md-9
       .bs-docs-section
         h2 Metadata
-        p
-          span ID: 
-          span= model.id
-        p
-          span Name: 
-          span= model.name
-        p
-          span Description: 
-          span= model.description
-        p
-          span Tags: 
-          span= model.tags
-        p 
-        span Root URL: 
-        span= model.id
+        p= 'ID: ' + model.id
+        p= 'Name: ' + model.name 
+        p= 'Description: ' + model.description
+        p= 'Tags: ' + model.tags
+        p= 'Root URL: ' + model.id
 
         h3 Model
         p
           a(href=model.id + '/model') View Full Model 
-          span Full Model of this Web Thing.
+          span of the weather station.
 
         hr
         
@@ -35,7 +25,7 @@ include head.pug
             span - 
             span= model.links.product.title
           li 
-            a(href=model.id + model.links.properties.link) properties 
+            a(href=model.links.properties.link) properties 
             span - 
             span= model.links.properties.title
           li

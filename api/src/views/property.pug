@@ -1,0 +1,19 @@
+include head.pug
+
+.container
+  .row
+    .col-md-9
+      .bs-docs-section
+        h2= property.name
+        p= property.description
+        p= 'Tags: ' + property.tags
+
+        h3 Values
+        hr
+        p= property.values.name
+        p= property.values.description
+        p= 'Unit: ' + property.values.unit
+        p Value: 39
+        p Timestamp: 28 mars 2020
+
+include footer.pug

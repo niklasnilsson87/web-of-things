@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const path = require('path')
 
 const mainRoutes = require('./src/routes/router')
+const setHeaders = require('./src/middlewares/setHeaders')
 
 const app = express()
 
@@ -17,8 +18,14 @@ app.use(express.urlencoded({ extended: true }))
 app.set('views', path.join(__dirname, 'src', 'views'))
 app.set('view engine', 'pug')
 
+app.use((req, res, next) => {
+  res.locals.path = req.path
+  next()
+})
+
 // Routes
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(setHeaders)
 app.use('/', mainRoutes)
 
 // Error handling
@@ -33,7 +40,7 @@ app.use((error, req, res, next) => {
     .json({
       error: error.message,
       request: `${req.protocol}://${req.headers.host}${req.originalUrl}`,
-      home: `${req.protocol}://${req.headers.host}/api`
+      home: `${req.protocol}://${req.headers.host}`
     })
 })
 

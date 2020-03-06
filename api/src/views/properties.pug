@@ -1,0 +1,21 @@
+include head.pug
+
+.container
+  .row
+    .col-md-9
+      .bs-docs-section
+        h2 List of Properties
+        hr
+        each property in properties
+            .item
+                h3
+                    a(href=property.link)= property.name
+                ul.list-group
+                    li.list-group-item
+                        span= property.id
+                        span.badge 22
+                    li.list-group-item
+                        span timestamp
+                        span.badge 6 mars 2020
+
+include footer.pug
