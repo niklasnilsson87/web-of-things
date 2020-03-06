@@ -16,4 +16,7 @@ include head.pug
         p= 'Value: ' + property.values.latest.value
         p= 'Timestamp: ' + property.values.latest.updated
 
+        h3 Additional info
+        p In order to limit the results, you can use the ?limit=X query parameter when performing a request with JSON as Accept header.
+
 include footer.pug
