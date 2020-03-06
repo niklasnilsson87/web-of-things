@@ -8,5 +8,5 @@ html(lang="en")
         #container.bs-docs-header
             .container
                 h1 
-                    a(href="http://localhost:5000") localhost:8000
+                    a(href=protocol + '://' + baseURL)= baseURL
                     span= path

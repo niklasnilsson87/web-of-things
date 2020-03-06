@@ -1,10 +1,9 @@
-const model = require('../resources/model')
 const fetch = require('node-fetch')
 require('dotenv').config()
 
-const resources = model.links.properties.resources
-
 const getProperties = async (req, res, next) => {
+  const resources = req.model.links.properties.resources
+
   const weatherData = await getLastValuesFromPi()
 
   for (const item in resources) {
@@ -20,7 +19,7 @@ const getProperties = async (req, res, next) => {
 
 const getProperty = async (req, res, next) => {
   const id = req.params.id
-  const property = resources[id]
+  const property = req.model.links.properties.resources[id]
   const limit = req.query.limit
 
   if (!property) {
@@ -32,12 +31,17 @@ const getProperty = async (req, res, next) => {
   if (req.headers.accept === 'application/json') {
     const data = await getValuesFromPi(property.id, limit)
     property.values.data = data
+
     return res.status(200).json({ property })
   }
+
+  const weatherData = await getLastValuesFromPi()
+  property.values.latest = weatherData.find(feed => feed.name === property.id)
 
   res.render('property', { property })
 }
 
+// Fetch feeds
 async function getLastValuesFromPi () {
   const res = await fetch(`https://io.adafruit.com/api/v2/${process.env.API_USER}/feeds`, {
     headers: { 'x-aio-key': process.env.API_KEY }

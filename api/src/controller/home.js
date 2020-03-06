@@ -1,6 +1,6 @@
-const model = require('../resources/model')
-
 module.exports = (req, res, next) => {
+  const model = req.model
+
   if (req.headers.accept === 'application/json') {
     const obj = {
       id: model.id,

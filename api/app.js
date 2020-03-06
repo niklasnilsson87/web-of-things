@@ -6,6 +6,7 @@ const path = require('path')
 
 const mainRoutes = require('./src/routes/router')
 const setHeaders = require('./src/middlewares/setHeaders')
+const model = require('./src/resources/model')
 
 const app = express()
 
@@ -17,15 +18,18 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.set('views', path.join(__dirname, 'src', 'views'))
 app.set('view engine', 'pug')
+app.use(express.static(path.join(__dirname, 'public')))
+app.use(setHeaders)
+app.use(model)
 
 app.use((req, res, next) => {
   res.locals.path = req.path
+  res.locals.baseURL = req.headers.host
+  res.locals.protocol = req.protocol
   next()
 })
 
 // Routes
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(setHeaders)
 app.use('/', mainRoutes)
 
 // Error handling
