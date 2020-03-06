@@ -1,0 +1,53 @@
+include head.pug
+
+.container
+  .row
+    .col-md-9
+      .bs-docs-section
+        h2 Metadata
+        p
+          span ID: 
+          span= model.id
+        p
+          span Name: 
+          span= model.name
+        p
+          span Description: 
+          span= model.description
+        p
+          span Tags: 
+          span= model.tags
+        p 
+        span Root URL: 
+        span= model.id
+
+        h3 Model
+        p
+          a(href=model.id + '/model') View Full Model 
+          span Full Model of this Web Thing.
+
+        hr
+        
+        h2 Resources
+        ul
+          li 
+            a(href=model.links.product.link) product 
+            span - 
+            span= model.links.product.title
+          li 
+            a(href=model.id + model.links.properties.link) properties 
+            span - 
+            span= model.links.properties.title
+          li
+            a(href=model.links.properties.type.link) type 
+            span - 
+            span= model.links.properties.type.title
+          li
+            a(href=model.links.properties.help.link) help 
+            span - 
+            span= model.links.properties.help.title
+          li 
+            a(href=model.links.properties.ui.link) ui 
+            span - 
+            span= model.links.properties.ui.title
+include footer.pug
