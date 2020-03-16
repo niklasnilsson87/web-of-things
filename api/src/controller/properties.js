@@ -54,7 +54,7 @@ const getPropertyAsChart = async (req, res, next) => {
 
   if (req.headers.accept === 'application/json') {
     const { parameters, data } = await getChartValuesFromPi(property.id, start_time, end_time, resolution, hours)
-    property.parameters = parameters
+    property.values.parameters = parameters
     property.values.data = data
 
     return res.status(200).json({ property })
