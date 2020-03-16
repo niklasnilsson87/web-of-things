@@ -1,0 +1,37 @@
+include head.pug
+
+.container
+  .row
+    .col-md-9
+      .bs-docs-section
+        h2= property.name
+        p= property.description
+        p= 'Tags: ' + property.tags
+
+        h3 Parameters
+        hr
+        p 
+            a(href=property.link + '/chart' + '?start_time=' + property.parameters.start_time)
+                code ?start_time
+                span= '=' + property.parameters.start_time
+        p
+            a(href=property.link + '/chart' + '?end_time=' + property.parameters.end_time)
+                code ?end_time
+                span= '=' + property.parameters.end_time
+        p 
+            a(href=property.link + '/chart' + '?resolution=' + property.parameters.resolution)
+                code ?resolution
+                span= '=' + property.parameters.resolution
+        p 
+            a(href=property.link + '/chart' + '?hours=' + property.parameters.hours)
+                code ?hours
+                span= '=' + property.parameters.hours
+
+
+        h3 Columns
+        hr
+        p= property.columns
+        
+        hr
+
+include footer.pug

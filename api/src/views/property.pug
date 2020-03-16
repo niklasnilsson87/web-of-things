@@ -16,6 +16,11 @@ include head.pug
         p= 'Value: ' + property.values.latest.value
         p= 'Timestamp: ' + property.values.latest.updated
 
+        h3 Additional routes
+        hr
+        h4
+          a(href=property.link + '/chart') Chart
+
         h3 Additional info
         hr
         p In order to limit the results, you can use the 

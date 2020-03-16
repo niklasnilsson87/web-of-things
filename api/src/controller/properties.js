@@ -41,6 +41,32 @@ const getProperty = async (req, res, next) => {
   res.render('property', { property })
 }
 
+const getPropertyAsChart = async (req, res, next) => {
+  const id = req.params.id
+  const property = req.model.links.properties.resources[id]
+  const { start_time, end_time, resolution, hours } = req.query
+
+  if (!property) {
+    const err = new Error('Property ID was not found')
+    err.status = 404
+    next(err)
+  }
+
+  if (req.headers.accept === 'application/json') {
+    const { data } = await getChartValuesFromPi(property.id, start_time, end_time, resolution, hours)
+    property.values.data = data
+
+    return res.status(200).json({ property })
+  }
+
+  const chartData = await getChartValuesFromPi(property.id)
+
+  property.parameters = chartData.parameters
+  property.columns = chartData.columns
+
+  res.render('property-chart', { property })
+}
+
 // Fetch feeds
 async function getLastValuesFromPi () {
   const res = await fetch(`https://io.adafruit.com/api/v2/${process.env.API_USER}/feeds`, {
@@ -71,7 +97,16 @@ async function getValuesFromPi (feedName, limit = 30) {
   return data
 }
 
+async function getChartValuesFromPi (feedName, startTime = '', endTime = '', resolution = '', hours = '') {
+  const res = await fetch(`https://io.adafruit.com/api/v2/${process.env.API_USER}/feeds/${feedName}/data/chart?start_time=${startTime}&end_time=${endTime}&resolution=${resolution}&hours=${hours}`, {
+    headers: { 'x-aio-key': process.env.API_KEY }
+  })
+  const result = await res.json()
+  return result
+}
+
 module.exports = {
   getProperties,
-  getProperty
+  getProperty,
+  getPropertyAsChart
 }
