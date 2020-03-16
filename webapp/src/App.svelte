@@ -37,12 +37,6 @@
 		width: 50%;
 	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-
 	@media (max-width: 600px) {
 		.chart {
 			width: 100%;
