@@ -99,7 +99,7 @@ async function getValuesFromPi (feedName, limit = 30) {
 }
 
 async function getChartValuesFromPi (feedName, startTime = '', endTime = '', resolution = '', hours = '') {
-  const res = await fetch(`https://io.adafruit.com/api/v2/${process.env.API_USER}/feeds/${feedName}/data/chart?start_time=${startTime}&end_time=${endTime}&resolution=${resolution}&hours=${hours}`, {
+  const res = await fetch(`https://io.adafruit.com/api/v2/${process.env.API_USER}/feeds/${feedName}/data/chart?start_time=${startTime}&end_time=${endTime}&resolution=${resolution}&hours=${hours}&field=val`, {
     headers: { 'x-aio-key': process.env.API_KEY }
   })
   const result = await res.json()
