@@ -1,9 +1,28 @@
 doctype html
 html(lang="en")
     head
-        title My Site
+        title Rpi Weather Station
         link(rel="stylesheet", href="/style.css")
         link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+
+        meta(property='og:url', content=baseURL)
+        meta(property='og:title', content='Weather Station Raspberry Pi')
+        meta(property='og:type', content='website')
+        meta(property='og:site_name', content='Rpi Weather Station')
+        meta(property='og:description', content='A simple weather station measuring temperature and humidity.')
+        
+        script(type="application/ld+json").
+            {
+                "@context": "http://schema.org/",
+                "@id": "https://rpi-weather-station.herokuapp.com",
+                "name": "Weather Station Raspberry Pi",
+                "description": "A simple weather station measuring temperature and humidity.",
+                "productID" : "asin:B07P4LSDYV",
+                "manufacturer" : "Raspberry Pi",
+                "model" : "100437"
+            }
+
+
     body
         #container.bs-docs-header
             .container
