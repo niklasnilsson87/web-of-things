@@ -1,5 +1,7 @@
 # Web of Things Project
 
+Sammarbete tillsammans med [Adam Bergman](https://github.com/WPUtvecklare)
+
 ## Länkar
 
 API: [https://rpi-weather-station.herokuapp.com/](https://rpi-weather-station.herokuapp.com/)
